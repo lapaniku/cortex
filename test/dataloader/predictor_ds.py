@@ -81,8 +81,8 @@ class PythonPredictor:
 
         self.s3 = boto3.client("s3")
 
-        self.bucket, self.key = re.match("s3://(.+?)/(.+)", config["dest_s3_dir"]).groups()
-        self.key = os.path.join(self.key, job_spec["job_id"])
+        # self.bucket, self.key = re.match("s3://(.+?)/(.+)", config["dest_s3_dir"]).groups()
+        # self.key = os.path.join(self.key, job_spec["job_id"])
 
 
     def _calc_vector_batch_float(self, img_batch):
@@ -117,8 +117,8 @@ class PythonPredictor:
             #     bvector = self._transform_vector_2bytes(vector)
             #     results.append({"url": image_url, "vector": vector, "bvector": base64.b64encode(bvector).decode('utf-8')})
 
-            json_output = json.dumps(results, cls=NumpyEncoder)
-            self.s3.put_object(Bucket=self.bucket, Key=f"{self.key}/{batch_id}.json", Body=json_output)
+            # json_output = json.dumps(results, cls=NumpyEncoder)
+            # self.s3.put_object(Bucket=self.bucket, Key=f"{self.key}/{batch_id}.json", Body=json_output)
 
             # status, ids = self.milvus.insert(collection_name=collection_name, records=vectors)
             # redis_conn.mset(dict(zip(ids, payload)))

@@ -105,7 +105,8 @@ class PythonPredictor:
 
     def predict(self, payload, batch_id):        
         try:
-            ds = DataLoader(URLDataset(path_list=payload, target_list=payload, transform=self.augs, use_torchvision=False), num_workers=2)
+            s3_urls = ["https://imdatasets.s3.amazonaws.com/"+p for p in payload]
+            ds = DataLoader(URLDataset(path_list=s3_urls, target_list=s3_urls, transform=self.augs, use_torchvision=False), num_workers=2)
             batch = []
             for item in ds:
                 n = to_numpy(item[0])[0][0]

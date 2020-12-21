@@ -76,10 +76,10 @@ class PythonPredictor:
                         alb.CenterCrop(224, 224),
                         ToTensor()])
 
-        if len(config.get("dest_s3_dir", "")) == 0:
-            raise Exception("'dest_s3_dir' field was not provided in job submission")
+        # if len(config.get("dest_s3_dir", "")) == 0:
+        #     raise Exception("'dest_s3_dir' field was not provided in job submission")
 
-        self.s3 = boto3.client("s3")
+        # self.s3 = boto3.client("s3")
 
         # self.bucket, self.key = re.match("s3://(.+?)/(.+)", config["dest_s3_dir"]).groups()
         # self.key = os.path.join(self.key, job_spec["job_id"])

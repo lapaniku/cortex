@@ -1,0 +1,7 @@
+- name: imagesearch-batch
+  kind: BatchAPI
+  predictor:
+    type: python
+    path: predictor_ds.py
+  compute:
+    cpu: 1

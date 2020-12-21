@@ -1,0 +1,10 @@
+cluster_name: cortex
+
+# AWS region
+region: us-east-1
+
+# instance type
+instance_type: t3.medium
+
+min_instances: 1
+max_instances: 2

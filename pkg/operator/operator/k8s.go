@@ -118,6 +118,24 @@ func PythonPredictorContainers(api *spec.API) ([]kcore.Container, []kcore.Volume
 	apiPodResourceLimitsList := kcore.ResourceList{}
 	apiPodVolumeMounts := defaultVolumeMounts()
 	volumes := DefaultVolumes()
+
+	// TODO: test
+	// --------- Made these changes ---------
+	volumes = append(volumes, kcore.Volume{
+		Name: "dshm",
+		VolumeSource: kcore.VolumeSource{
+			EmptyDir: &kcore.EmptyDirVolumeSource{
+				Medium:    kcore.StorageMediumMemory,
+				SizeLimit: k8s.QuantityPtr(kresource.MustParse("256Mi")),
+			},
+		},
+	})
+	apiPodVolumeMounts = append(apiPodVolumeMounts, kcore.VolumeMount{
+		Name:      "dshm",
+		MountPath: "/dev/shm",
+	})
+	// --------------------------------------
+
 	containers := []kcore.Container{}
 
 	if api.Compute.Inf == 0 {
